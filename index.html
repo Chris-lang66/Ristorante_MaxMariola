@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Ristorante Max Mariola</title>
+    <meta name="description" content="Ristorante Max Mariola — L'arte della cucina italiana d'autore a Roma." />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Karla:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-inner">
+            <div class="navbar-logo" onclick="navigateTo('home')">Max Mariola</div>
+            <ul class="navbar-links">
+                <li><a onclick="navigateTo('home')" data-page="home">Home</a></li>
+                <li><a onclick="navigateTo('menu')" data-page="menu">Menù</a></li>
+                <li><a onclick="navigateTo('chef')" data-page="chef">Chef</a></li>
+                <li><a onclick="navigateTo('recensioni')" data-page="recensioni">Recensioni</a></li>
+                <li><a onclick="navigateTo('storia')" data-page="storia">Storia</a></li>
+                <li><a onclick="navigateTo('prenota')" data-page="prenota">Prenota</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" onclick="toggleMobile()">&#9776;</button>
+        </div>
+    </nav>
+
+    <!-- MENU MOBILE -->
+     <div class="mobile-menu" id="mobileMenu">
+        <a onclick="navigateTo('home')">Home</a>
+        <a onclick="navigateTo('menu')">Menù</a>
+        <a onclick="navigateTo('chef')">Chef</a>
+        <a onclick="navigateTo('recensioni')">Recensioni</a>
+        <a onclick="navigateTo('storia')">Storia</a>
+        <a onclick="navigateTo('prenota')">Prenota</a>
+     </div>
+
+     <!-- HOME -->
+      <div id="page-home" class="page-section">
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <p class="hero-subtitle">Ristorante d'autore</p>
+                <h1>L'arte della<br><span>cucina italiana</span></h1>
+                <p class="hero-desc">Benvenuti dove la semplicità incontra 
+                    la perfezione e ogni assaggio fa rumore.</p>
+                 <div class="hero-buttons">
+                    <a class="btn-primary" onclick="navigateTo('menu')">Scopri il Menù</a>
+                    <a class="btn-outline" onclick="navigateTo('prenota')">Prenota un Tavolo</a>
+                 </div>
+            </div>
+            <div class="scroll-arrow"><span></span></div>
+        </section>
+        <!-- ANTEPRIME -->
+         <section class="section">
+            <div class="section-center">
+                <div class="section-header">
+                    <p class="label">Esplora</p>
+                    <h2>Il nostro mondo</h2>
+                </div>
+                <div class="card-grid">
+                    <div class="card" onclick="navigateTo ('menu')" style="cursor:pointer;">
+                        <div class="card-icon">🍽</div>
+                        <h3>Il Menù</h3>
+                        <p>Antipasti ricercati, primi della tradizione e dolci artigianali. Scopri 
+                            i sapori che ci rendono unici</p>
+                    </div>
+                    <div class="card" onclick="navigateTo ('chef')" style="cursor:pointer">
+                        <div class="card-icon">👨‍🍳</div>
+                        <h3>I Nostri Chef</h3>
+                        <p>Un team di professionisti appassionati che trasformano ingredienti semplici 
+                            in esperienze memorabili</p>
+                    </div>
+                    <div class="card" onclick="navigateTo ('recensioni')" style="cursor:pointer">
+                         <div class="card-icon">⭐</div>
+                         <h3>Recensioni</h3>
+                         <p>Leggi cosa dicono i nostri ospiti. La soddisfazione 
+                            dei clienti è la nostra più grande ricompensa</p>
+                    </div>
+                </div>
+            </div>
+         </section>
+
+      <!-- CITAZIONE -->
+       <section class="quote-section">
+        <blockquote>Materia prima, tecnica e cuore. Il resto è solo rumore...anzi, Sound of Love!</blockquote>
+        <p class="author">- Max Mariola</p>
+       </section>
+      </div>
+      
+      <!----- MENU ----->
+      <div id="page-menu" class="page-section hidden">
+        <section class="section" style="padding-top:7rem;">
+            <div class="section-center">
+                <div class="section-header">
+                    <p class="label">I nostri piatti</p>
+                    <h2>Il Menù</h2>
+                </div>
+                <div class="filter-bar" id="menuFilters"></div>
+                <div class="card-grid card-grid-2" id="menuGrid"></div>
+                <div class="menu-download">
+                <a href="image/menu-ristorante.pdf" download class="btn-menu">
+                  Scarica il menù completo (PDF)</a>
+                </div>
+                <p class="menu-note">I prezzi sono IVA inclusa. Per allergie e intolleranze,
+                    consultare il personale di sala.</p>
+            </div>
+        </section>
+      </div>
+
+      <!-- CHEF -->
+       <div id="page-chef" class="page-section hidden">
+        <section class="section" style="padding-top: 7rem;">
+            <div class="section-center">
+                <div class="section-header">
+                    <p class="label">Il team</p>
+                    <h2>I Nostri Chef</h2>
+                </div>
+                <div class="card-grid" id="chefGrid"></div>
+            </div>
+        </section>
+       </div>
+
+       <!-- RECENSIONI -->
+        <div id="page-recensioni" class="page-section hidden">
+            <section class="section" style="padding-top: 7rem;">
+                <div class="section-center">
+                    <div class="section-header">
+                        <p class="label">Testimonianze</p>
+                        <h2>Recensioni</h2>
+                    </div>
+                    <div class="review-box" id="reviewBox">
+                        <div class="stars" id="reviewStars"></div>
+                        <blockquote id="reviewText"></blockquote>
+                        <div class="reviewer">
+                            <strong id="reviewName"></strong>
+                            <span id="reviewDate"></span>
+                        </div>
+                        <div class="review-nav">
+                            <button onclick="prevReview()">&#8249;</button>
+                            <button onclick="nextReview()">&#8250;</button>
+                        </div>
+                        <div class="review-dots" id="reviewDots"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- STORIA -->
+        <div id="page-storia" class="page-section hidden">
+            <section class="section" style="padding-top: 7rem">
+                <div class="section-center">
+                    <div class="section-header">
+                        <p class="label">Le nostre radici</p>
+                        <h2>La Storia di Max</h2>
+                    </div>
+                    <div class="storia-grid">
+                        <div class="storia-text">
+                            <h2>Dove tutto è <span>iniziato</span></h2>
+                            <p>La storia di Max Mariola affonda le radici tra il profumo del mar Mediterraneo e la cucina di casa a Nettuno, dove mamma Fiorella gli ha trasmesso 
+                            l’idea che mangiare bene sia, prima di tutto, una questione di vita o di morte. È in questa passione viscerale che nasce il suo legame indissolubile 
+                            con la materia prima.</p>
+                            <p>I suoi primi veri passi tra i fornelli arrivano negli anni Novanta a «Il Castagnone» di Genzano Romano, sotto la guida di Attilio Renzo Gabbarini. 
+                            Sono anni di formazione intensa, trascorsi tra la pratica in cucina e i banchi di una scuola specialistica. È qui che avviene l'incontro della vita 
+                            con Laura Ravaioli: è lei a intuire il suo talento e a volerlo al suo fianco nella nascita del primo canale televisivo dedicato al cibo, portandolo 
+                            davanti alle telecamere di Gambero Rosso Channel.</p>
+                            <p>Proprio in quegli studi televisivi, Max incontra il suo vero maestro, Fulvio Pierangelini, lo chef che più di tutti ha forgiato la sua filosofia 
+                            culinaria. Oggi, nel suo ristorante, Max traduce quegli insegnamenti in piatti che celebrano la semplicità e il rispetto per la terra, unendo la 
+                            tradizione italiana alle influenze raccolte nei suoi viaggi nel mondo.</p>
+                            <div class="storia-quote">
+                              <p>"La cucina è un profondo rispetto per la materia prima, come il contadino che guarda i pomodorini spaccati dal sole."</p>
+                              <p class="author">— Max Mariola</p>
+                         </div>
+                        </div>
+                        <div class="storia-img">
+                            <div class="corner-tl"></div>
+                            <img src="https://cdn.prod.website-files.com/654117a226e863ccfb523b1d/65b15014a2c7775f61707eee_Gallery%201.jpg" 
+                            alt="Interno del ristorante Max Mariola">
+                            <div class="corner-br"></div>
+                        </div>
+                    </div>
+
+             <!-- TIMELINE -->
+             <div class="timeline">
+                <div class="timeline-item">
+                  <p class="year">'80 - '90</p>
+                  <h3>Le Radici e la Gavetta</h3>
+                  <p>Dalla bottega del padre a Nettuno ai primi passi nelle cucine di Genzano. Anni di pura gavetta per imparare il rispetto della materia prima.</p>
+              </div>
+              <div class="timeline-item">
+                <p class="year">'90</p>
+                <h3>L'Incontro con i Maestri</h3>
+                <p>Frequenta la scuola professionale dove conosce Laura Ravaioli e incontra il suo mentore, Fulvio Pierangelini, che ne forgia l'identità culinaria.</p>
+              </div>
+              <div class="timeline-item">
+                <p class="year">Anni 2000 - 2010</p>
+                <h3>Il Volto del Gambero Rosso</h3>
+                <p>Diventa lo chef di punta di Gambero Rosso Channel, portando per anni la cultura del "mangiar bene" nelle case di milioni di italiani.</p>
+              </div>
+              <div class="timeline-item">
+                <p class="year">2024</p>
+                <h3>Il Sogno</h3>
+                <p>Dopo l'incredibile successo globale sui social, Max apre il suo primo ristorante a Milano.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+     </div> 
+
+     <!-- PRENOTA -->
+     <div id="page-prenota" class="page-section hidden">
+        <section class="section" style="padding-top: 7rem">
+            <div class="form-container">
+                <div class="section-header">
+                    <p class="label">Riserva il tuo tavolo</p>
+                    <h2>Prenota</h2>
+                </div>
+                <div class="form-box">
+                    <form id="prenotaForm" novalidate>
+                        <div class="form-group">
+                            <label>Nome e Cognome *</label>
+                            <input type="text" id="f-nome" placeholder="es. Cristiano Ronaldo"/>
+                            <p class="form-error" id="err-nome"></p>
+                        </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" id="f-email" placeholder="es. cristiano@gmail.com"/>
+                            <p class="form-error" id="err-email"></p>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Data *</label>
+                                <input type="date" id="f-data"/>
+                                <p class="form-error" id="err-data"></p>
+                            </div>
+                            <div class="form-group">
+                                <label>Ora *</label>
+                                <select id="f-ora">
+                                    <option value="">Seleziona orario</option>
+                                    <option>12:00</option><option>12:30</option>
+                                    <option>13:00</option><option>13:30</option>
+                                    <option>19:00</option><option>19:30</option>
+                                    <option>20:00</option><option>20:30</option>
+                                    <option>21:00</option><option>21:30</option>
+                                </select>
+                                <p class="form-error" id="err-ora"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Numero di Persone *</label>
+                               <select id="f-persone">
+                               <option value="">Seleziona</option>
+                               <option>1 persona</option><option>2 persone</option>
+                               <option>3 persone</option><option>4 persone</option>
+                               <option>5 persone</option><option>6 persone</option>
+                               <option>7 persone</option><option>8 persone</option>
+                            </select>
+                            <p class="form-error" id="err-persone"></p>
+                        </div>
+                        <div class="form-group">
+                            <label>Note aggiuntive</label>
+                            <textarea rows="3" id="f-note" placeholder="Allergie, occasioni speciali, preferenze..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary" style="width: 100%">Conferma Prenotazione</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+     </div> 
+    
+        <!-- FOOTER -->
+         <footer class="footer">
+            <div class="footer-inner">
+                <div>
+                    <img class="logom" src="/image/Logom.png" alt="Logo del ristorante">
+                    <h3>Max Mariola</h3>
+                    <p>L'arte della cucina italiana, dove tradizione e innovazione si incontrano in ogni piatto.</p>
+                </div>
+                <div>
+                    <h4>Orari di Apertura</h4>
+                    <ul>
+                        <li>Lunedi - Venerdi: 12:00 - 15:00 | 19:00 - 23:00</li>
+                        <li>Sabato: 12:00 - 15:00 | 19:00 - 23:00</li>
+                        <li>Domenica: 12:00 - 15:00 | 19:00 - 22:00 </li>
+                    </ul>
+                    <h4>Orari Cocktail Bar</h4>
+                    <ul>
+                        <li>Martedi - Venerdi: 19:00 - 00:00</li>
+                    </ul>
+                    <p style="margin-top: 1rem">Via San Marco 26, 20121 Milano</p>
+                    <p>Tel: +39 02 4936 6145</p>
+                    <p>info@maxmariolarestaurant.com</p>
+                </div>
+                <div>
+                    <h4>Navigazione</h4>
+                    <div class="footer-nav">
+                        <a onclick="navigateTo('menu')">Menù</a>
+                        <a onclick="navigateTo('chef')">Il Team</a>
+                        <a onclick="navigateTo('storia')">Max Mariola</a>
+                        <a onclick="navigateTo('prenota')">Prenota</a>
+                    </div>
+                    <div class="footer-social">
+                    <a href="https://www.instagram.com/Chefmaxmariola/" aria-label="Instagram"> <svg class="social-icon" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M7.75 2C4.58 2 2 4.58 2 7.75v8.5C2 19.42 4.58 22 7.75 22h8.5C19.42 22 22 19.42 22 16.25v-8.5C22 4.58 19.42 2 16.25 2h-8.5zm0 2h8.5C18.55 4 20 5.45 20 7.75v8.5c0 2.3-1.45 3.75-3.75 3.75h-8.5C5.45 20 4 18.55 4 16.25v-8.5C4 5.45 5.45 4 7.75 4zm4.25 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm5.25-.88a1.12 1.12 0 100 2.24 1.12 1.12 0 000-2.24z"/>
+                    </svg></a>
+                    <a href="https://www.facebook.com/MaxMariolaRestaurant/" aria-label="Facebook"><svg class="social-icon" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M22 12a10 10 0 10-11.5 9.9v-7h-2.6v-2.9h2.6V9.8c0-2.6 1.5-4 3.9-4 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.3 0-1.7.8-1.7 1.6v2h2.9l-.5 2.9h-2.4v7A10 10 0 0022 12z"/>
+                    </svg></a>
+                    <a href="https://www.youtube.com/ChefMaxMariola/" aria-label="Youtube"><svg class="social-icon" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M23.5 6.2a3 3 0 00-2.1-2.1C19.6 3.5 12 3.5 12 3.5s-7.6 0-9.4.6A3 3 0 00.5 6.2 31 31 0 000 12a31 31 0 00.5 5.8 3 3 0 002.1 2.1c1.8.6 9.4.6 9.4.6s7.6 0 9.4-.6a3 3 0 002.1-2.1A31 31 0 0024 12a31 31 0 00-.5-5.8zM9.7 15.5v-7l6 3.5-6 3.5z"/>
+                    </svg></a>
+                    <a href="https://www.tiktok.com/ChefMaxMariola/" aria-label="Tiktok"><svg class="social-icon" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M16.5 3c.3 1.8 1.8 3.2 3.5 3.5v3a6.5 6.5 0 01-3.5-1.2v6.2a5.5 5.5 0 11-5.5-5.5c.3 0 .6 0 .9.1v3.1a2.5 2.5 0 102.6 2.5V3h2z"/>
+                    </svg></a>
+                </div>
+                </div>
+            </div>
+            <div class="footer-map"> <iframe src="https://www.google.com/maps?q=Via+San+Marco+26+Milano&output=embed"
+             width="100%"
+             height="200"
+             loading="lazy">
+             </iframe></div>
+            <div class="footer-copy">© 2026 Ristorante Max Mariola. Tutti i diritti riservati.</div>
+         </footer>
+
+         <!-- TOAST NOTIFICA -->
+          <div class="toast" id="toast">
+            <div class="toast-title" id="toastTitle"></div>
+            <div class="toast-desc" id="toastDesc"></div>
+          </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
